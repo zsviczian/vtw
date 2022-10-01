@@ -23,6 +23,11 @@ h1, h2, h3, h4, h5 {
   color: #009999;
 }
 
+hr {
+  background-color: #646261;
+  height: 1px;
+  max-width: 510px;
+}
 .highlight {
   font-weight: bold;
   color: #009999;
