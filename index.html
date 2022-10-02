@@ -117,6 +117,7 @@
             src="images/Book-on-a-Page-Workshop-Curriculum.svg"
             style="max-width:510px;" 
             onclick="if(this.style.maxWidth === '510px') {this.style.maxWidth = '100%'; this.parentElement.ariaLabel = 'Click the image to reduce';} else { this.style.maxWidth = '510px'; this.parentElement.ariaLabel = 'Click the image to enlagre';}"
+            onload="this.style.maxWidth = '510px';"   
           />
         </div>
       </div>
@@ -298,8 +299,13 @@
       </div>
     </div>
     
-    <div class="mx-auto" style="max-width:1200px;">
-    <iframe style="height:800px; width:100%" src="./testimonials.html" title="Testimonials" frameborder="0" allow="accelerometer; clipboard-write; picture-in-picture" allowfullscreen></iframe>
+    <div class="mx-auto" style="max-width:1200px;overflow: hidden;">
+      <iframe
+        style="height:600px; width:100%;overflow-x: hidden; overflow-y: auto"
+        src="./testimonials.html" title="Testimonials"
+        frameborder="0"
+        allowfullscreen
+      />
     </div>
     
     
