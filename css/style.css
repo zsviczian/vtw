@@ -1,3 +1,37 @@
+iframe.youtube-large {
+  width: 700px;
+  height: 394px;
+  max-width: 700px;
+  max-height: 394px;
+}
+
+@media  screen and  (max-width: 1200px) { 
+  iframe.youtube-large {
+    width: 560px;
+    height: 315px;
+    max-width: 560px;
+    max-height: 315px;
+  }  
+}
+
+@media  screen and  (max-width: 576px) {
+  iframe.youtube-large {
+    width: 392px;
+    height: 221px;
+    max-width: 392px;
+    max-height: 221px;
+  }
+}
+
+@media  screen and (max-width: 415px) {
+  iframe.youtube-large {
+    width: 280px;
+    height: 158px;
+    max-width: 280px;
+    max-height: 158px;
+  }
+}
+
 @font-face {
   font-family: "Virgil";
   src: url("../font/Virgil.woff2");
