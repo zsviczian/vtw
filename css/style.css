@@ -38,6 +38,12 @@ iframe.youtube-large {
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Cascadia";
+  src: url("../font/Cascadia.woff2");
+  font-display: swap;
+}
+
 body {
   background-color: #FFF6F0 !important;
   font-family: "Virgil", -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
