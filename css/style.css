@@ -181,4 +181,6 @@ blockquote.twitter-tweet a:focus {
 
 .youtube-small {
   transform: scale(0.8);
+  width: 210px;
+
 }
