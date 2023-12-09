@@ -179,5 +179,6 @@ blockquote.twitter-tweet a:focus {
   text-decoration: underline;
 }
 
-/*-------------*/
-/*-------------*/
+.youtube-small {
+  transform: scale(0.8);
+}
