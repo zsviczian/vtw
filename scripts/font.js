@@ -48,6 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (fontCookie === "default") {
     document.body.classList.remove("virgil");
   } else {
-    document.body.classList.add("virgil");
+    if(!document.body.classList.contains("virgil")) document.body.classList.add("virgil");
   }
 });
