@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function toggleFontFamily() {
       const currentFont = getCookie("fontFamily");
       const newFont = currentFont === "default" ? "virgil" : "default"; 
-      setCookie("fontFamily", newFont, 30);
+      setCookie("fontFamily", newFont, 30);  
       document.body.classList.toggle("virgil");
   }
 
@@ -45,7 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Check cookie on page load and apply font family if set
   const fontCookie = getCookie("fontFamily");
-  if (fontCookie === "virgil") {
-      document.body.classList.add("virgil");
+  if (fontCookie === "default") {
+    document.body.classList.remove("virgil");
+  } else {
+    document.body.classList.add("virgil");
   }
 });
