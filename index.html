@@ -72,53 +72,65 @@
         }
     </style>
     <script>
-        function copyCouponAndRedirect() {
-            let couponCode = document.querySelector('.parity-banner-inner')?.innerHTML.match(/“([^”]+)”/)?.[1]?.trim();
+	function copyCouponAndRedirect() {
+	    let couponCode = document.querySelector('.parity-banner-inner')?.innerHTML.match(/“([^”]+)”/)?.[1]?.trim();
 	    if (!couponCode) {
-		couponCode = document.querySelector('.parity-banner-inner')?.innerHTML.match(/"([^"]+)"/)?.[1]?.trim();
+	        couponCode = document.querySelector('.parity-banner-inner')?.innerHTML.match(/"([^"]+)"/)?.[1]?.trim();
 	    }
-            const redirectMessage = document.getElementById('redirect-message');
-            let countdown = 5;
-            
-            if (couponCode) {
-                // Copy the coupon code to the clipboard
-                navigator.clipboard.writeText(couponCode).then(() => {
-                    // Show the redirect message and countdown
-                    redirectMessage.innerHTML = `
-                        Coupon code <b>${couponCode}</b> was copied to your clipboard!<br>
-                        Redirecting in <span class="counter">${countdown}</span> seconds.<br>
-                        If not redirected, click <a href="https://www.visual-thinking-workshop.com/product-structure">here</a>.
-                    `;
-                    redirectMessage.style.display = 'block';
+	    const redirectMessage = document.getElementById('redirect-message');
+	    let countdown = 5;
+	
+	    if (couponCode) {
+	        // Copy the coupon code to the clipboard
+	        navigator.clipboard.writeText(couponCode).then(() => {
+	            // Show the redirect message and countdown
+	            redirectMessage.innerHTML = `
+	                Coupon code <b>${couponCode}</b> was copied to your clipboard!<br>
+	                Redirecting in <span class="counter">${countdown}</span> seconds.<br>
+	                If not redirected, click <a href="https://www.visual-thinking-workshop.com/product-structure">here</a>.
+	            `;
+	            redirectMessage.style.display = 'block';
+	
+	            // Start countdown and redirect
+	            const interval = setInterval(() => {
+	                countdown--;
+	                document.querySelector('.counter').textContent = countdown;
+	                if (countdown === 0) {
+	                    clearInterval(interval);
+	                    window.location.href = 'https://www.visual-thinking-workshop.com/product-structure';
+	                }
+	            }, 1000);
+	        }).catch(err => {
+	            console.error('Failed to copy coupon code: ', err);
+	        });
+	    } else {
+	        // Coupon not found, show an alternative message with countdown
+	        redirectMessage.innerHTML = `
+	            No price parity setup for this location.<br>
+	            Redirecting in <span class="counter">${countdown}</span> seconds.<br>
+	            You can email <a href="mailto:info@visual-thinking-workshop.com">info@visual-thinking-workshop.com</a>
+	            explaining why we should consider price parity for your region.
+	        `;
+	        redirectMessage.style.display = 'block';
+	
+	        // Start countdown and redirect
+	        const interval = setInterval(() => {
+	            countdown--;
+	            document.querySelector('.counter').textContent = countdown;
+	            if (countdown === 0) {
+	                clearInterval(interval);
+	                window.location.href = 'https://www.visual-thinking-workshop.com/product-structure';
+	            }
+	        }, 1000);
+	    }
+	}
+	
+	// Event listener for the image click
+	window.onload = () => {
+	    const image = document.querySelector('img');
+	    image.addEventListener('click', copyCouponAndRedirect);
+	};
 
-                    // Start countdown and redirect
-                    const interval = setInterval(() => {
-                        countdown--;
-                        document.querySelector('.counter').textContent = countdown;
-                        if (countdown === 0) {
-                            clearInterval(interval);
-                            window.location.href = 'https://www.visual-thinking-workshop.com/product-structure';
-                        }
-                    }, 1000);
-                }).catch(err => {
-                    console.error('Failed to copy coupon code: ', err);
-                });
-            } else {
-                // Coupon not found, show an alternative message
-                redirectMessage.innerHTML = `
-                    No price parity setup for this location.<br>
-                    You can email <a href="mailto:info@visual-thinking-workshop.com">info@visual-thinking-workshop.com</a>
-                    explaining why we should consider price parity for your region.
-                `;
-                redirectMessage.style.display = 'block';
-            }
-        }
-
-        // Event listener for the image click
-        window.onload = () => {
-            const image = document.querySelector('img');
-            image.addEventListener('click', copyCouponAndRedirect);
-        };
     </script>
 </head>
 <body>
