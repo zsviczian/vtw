@@ -58,6 +58,7 @@
             text-align: center;
             display: none;
             z-index: 1000;
+	    font-size: 2rem;
         }
 
         #redirect-message a {
@@ -66,19 +67,17 @@
         }
 
         #redirect-message .counter {
-            font-size: 2rem;
+            font-size: 3rem;
             margin-top: 10px;
         }
     </style>
     <script>
         function copyCouponAndRedirect() {
-            const couponElement = document.querySelector('.parity-banner-inner b');
+            const couponCode = document.querySelector('.parity-banner-inner').innerHTML.match(/“([^”]+)”/)[1]?.trim();
             const redirectMessage = document.getElementById('redirect-message');
             let countdown = 5;
             
-            if (couponElement && couponElement.textContent) {
-                const couponCode = couponElement.textContent.replace(/[“”]/g, '').trim();
-
+            if (couponCode) {
                 // Copy the coupon code to the clipboard
                 navigator.clipboard.writeText(couponCode).then(() => {
                     // Show the redirect message and countdown
