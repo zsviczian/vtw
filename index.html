@@ -11,16 +11,37 @@
             padding: 0;
             font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;  /* Horizontally center the content */
-            align-items: flex-start;   /* Align the content at the top */
-            height: 100vh;             /* Make the body fill the viewport */
+            flex-direction: column;     /* Arrange items vertically */
+            justify-content: center;    /* Center items vertically */
+            align-items: center;        /* Center items horizontally */
+            min-height: 100vh;          /* Ensure full viewport height */
         }
 
         img {
-            margin-top: 100px;         /* Add top margin */
+            margin-top: 20px;           /* Space between banner and image */
             max-width: 1152px;
             width: 100%;
             height: auto;
+        }
+
+        .parity-banner {
+            background-color: #AF9178;
+            color: #FFF6F0;
+            border-radius: 10px;
+            font-size: 1rem;
+            padding: 20px 10px;
+            text-align: center;
+            position: relative;
+            width: 76% !important;                 /* Set the width to 73% of the image */
+            max-width: 890px !important;            /* 73% of 1152px (the image's max width) */
+        }
+
+        .parity-banner.parity-banner-has-logo {
+            padding-left: 0px !important;
+        }
+
+        .parity-banner-logo {
+            display:none !important;
         }
     </style>
     <script src="https://cdn.paritydeals.com/banner.js"></script>
