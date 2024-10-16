@@ -11,20 +11,22 @@
             padding: 0;
             font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;     /* Arrange items vertically */
-            justify-content: center;    /* Center items vertically */
-            align-items: center;        /* Center items horizontally */
-            min-height: 100vh;          /* Ensure full viewport height */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
         }
 
         img {
-            margin-top: 20px;           /* Space between banner and image */
+            margin-top: 20px;
             max-width: 1152px;
             width: 100%;
             height: auto;
+            cursor: pointer;
         }
 
-        .parity-banner {
+		.parity-banner {
             background-color: #AF9178;
             color: #FFF6F0;
             border-radius: 10px;
@@ -32,8 +34,8 @@
             padding: 20px 10px;
             text-align: center;
             position: relative;
-            width: 76% !important;                 /* Set the width to 73% of the image */
-            max-width: 890px !important;            /* 73% of 1152px (the image's max width) */
+            width: 76% !important;
+            max-width: 890px !important;
         }
 
         .parity-banner.parity-banner-has-logo {
@@ -43,10 +45,85 @@
         .parity-banner-logo {
             display:none !important;
         }
+
+        #redirect-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+            z-index: 1000;
+        }
+
+        #redirect-message a {
+            color: #00ff00;
+            text-decoration: underline;
+        }
+
+        #redirect-message .counter {
+            font-size: 2rem;
+            margin-top: 10px;
+        }
     </style>
-    <script src="https://cdn.paritydeals.com/banner.js"></script>
+    <script>
+        function copyCouponAndRedirect() {
+            const couponElement = document.querySelector('.parity-banner-inner b');
+            const redirectMessage = document.getElementById('redirect-message');
+            let countdown = 5;
+            
+            if (couponElement && couponElement.textContent) {
+                const couponCode = couponElement.textContent.replace(/[“”]/g, '').trim();
+
+                // Copy the coupon code to the clipboard
+                navigator.clipboard.writeText(couponCode).then(() => {
+                    // Show the redirect message and countdown
+                    redirectMessage.innerHTML = `
+                        Coupon code <b>${couponCode}</b> was copied to your clipboard!<br>
+                        Redirecting in <span class="counter">${countdown}</span> seconds.<br>
+                        If not redirected, click <a href="https://www.visual-thinking-workshop.com/product-structure">here</a>.
+                    `;
+                    redirectMessage.style.display = 'block';
+
+                    // Start countdown and redirect
+                    const interval = setInterval(() => {
+                        countdown--;
+                        document.querySelector('.counter').textContent = countdown;
+                        if (countdown === 0) {
+                            clearInterval(interval);
+                            window.location.href = 'https://www.visual-thinking-workshop.com/product-structure';
+                        }
+                    }, 1000);
+                }).catch(err => {
+                    console.error('Failed to copy coupon code: ', err);
+                });
+            } else {
+                // Coupon not found, show an alternative message
+                redirectMessage.innerHTML = `
+                    No price parity setup for this location.<br>
+                    You can email <a href="mailto:info@visual-thinking-workshop.com">info@visual-thinking-workshop.com</a>
+                    explaining why we should consider price parity for your region.
+                `;
+                redirectMessage.style.display = 'block';
+            }
+        }
+
+        // Event listener for the image click
+        window.onload = () => {
+            const image = document.querySelector('img');
+            image.addEventListener('click', copyCouponAndRedirect);
+        };
+    </script>
 </head>
 <body>
-   <a href="https://www.visual-thinking-workshop.com/product-structure"><img src="images/map.png" alt="Parity Deals Banner"/></a>
+    <img src="images/map.png" alt="Parity Deals Banner" onclick="copyCouponAndRedirect()"/>
+
+    <div id="redirect-message"></div>
+
+    <script src="https://cdn.paritydeals.com/banner.js"></script>
 </body>
 </html>
