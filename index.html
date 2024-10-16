@@ -73,7 +73,10 @@
     </style>
     <script>
         function copyCouponAndRedirect() {
-            const couponCode = document.querySelector('.parity-banner-inner').innerHTML.match(/“([^”]+)”/)[1]?.trim();
+            let couponCode = document.querySelector('.parity-banner-inner')?.innerHTML.match(/“([^”]+)”/)?.[1]?.trim();
+	    if (!couponCode) {
+		couponCode = document.querySelector('.parity-banner-inner')?.innerHTML.match(/"([^"]+)"/)?.[1]?.trim();
+	    }
             const redirectMessage = document.getElementById('redirect-message');
             let countdown = 5;
             
