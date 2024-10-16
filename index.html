@@ -26,7 +26,7 @@
             cursor: pointer;
         }
 
-	.parity-banner {
+	.parity-banner, .no-parity {
             background-color: #AF9178;
             color: #FFF6F0;
             border-radius: 10px;
@@ -125,19 +125,34 @@
 	    }
 	}
 	
-	// Event listener for the image click
+	function removeNoParityDiv() {
+	    const noParityDiv = document.querySelector('div.no-parity');
+	    if (noParityDiv) {
+	        noParityDiv.remove();
+	    }
+	}
+	
+	const observer = new MutationObserver((mutations) => {
+	    mutations.forEach(mutation => {
+	        if (mutation.type === 'attributes' && mutation.target.classList.contains('pd-has-parity-banner')) {
+	            removeNoParityDiv();
+	        }
+	    });
+	});
+	
+	const config = { attributes: true, childList: false, subtree: false };
+	
+	observer.observe(document.body, config);
+	
 	window.onload = () => {
 	    const image = document.querySelector('img');
 	    image.addEventListener('click', copyCouponAndRedirect);
 	};
-
     </script>
 </head>
 <body>
-    <div class="parity-banner">
-        <div class="parity-banner-inner">
-            Looks like there is no price parity set up at this time and/or for your region. You may email <a style="color: #99DEDE;" href="mailto:info@visual-thinking-workshop.com">info@visual-thinking-workshop.com</a> explaining why I should consider price parity for your region.
-        </div>
+    <div class="no-parity">
+       Looks like there is no price parity set up at this time and/or for your region. You may email <a style="color: #99DEDE;" href="mailto:info@visual-thinking-workshop.com">info@visual-thinking-workshop.com</a> explaining why I should consider price parity for your region.
     </div>
     <img src="images/map.png" alt="Parity Deals Banner" onclick="copyCouponAndRedirect()"/>
     <div id="redirect-message"></div>
