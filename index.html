@@ -141,16 +141,15 @@
 	});
 	
 	const config = { attributes: true, childList: false, subtree: false };
-
-	if(document.body.classList.contains("pd-has-parity-banner")) {
-	  removeNoParityDiv();
-	} else {
-	    observer.observe(document.body, config);
-	}
 	
 	window.onload = () => {
 	    const image = document.querySelector('img');
 	    image.addEventListener('click', copyCouponAndRedirect);
+	    if(document.body.classList.contains("pd-has-parity-banner")) {
+	  	removeNoParityDiv();
+	    } else {
+	    	observer.observe(document.body, config);
+	    }
 	};
     </script>
 </head>
