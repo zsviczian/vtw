@@ -1,164 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parity Deals Banner</title>
-    <style>
-        body {
-            background-color: #FFF6F0;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            position: relative;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parity Deals Banner</title>
+  <style>
+    body {
+      background-color: #FFF6F0;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+    }
 
-        img {
-            margin-top: 20px;
-            max-width: 1152px;
-            width: 100%;
-            height: auto;
-            cursor: pointer;
-        }
+    img {
+      margin-top: 20px;
+      max-width: 1152px;
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
 
-	.parity-banner, .no-parity {
-            background-color: #AF9178;
-            color: #FFF6F0;
-            border-radius: 10px;
-            font-size: 1rem;
-            padding: 20px 10px;
-            text-align: center;
-            position: relative;
-            width: 74.5% !important;
-            max-width: 890px !important;
-        }
+    .parity-banner, .no-parity {
+      background-color: #AF9178;
+      color: #FFF6F0;
+      border-radius: 10px;
+      font-size: 1rem;
+      padding: 20px 10px;
+      text-align: center;
+      position: relative;
+      width: 74.5% !important;
+      max-width: 890px !important;
+    }
 
-        .parity-banner.parity-banner-has-logo {
-            padding-left: 10px !important;
-        }
+    .parity-banner.parity-banner-has-logo {
+      padding-left: 10px !important;
+    }
 
-        .parity-banner-logo {
-            display:none !important;
-        }
+    .parity-banner-logo {
+      display:none !important;
+    }
 
-        #redirect-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            display: none;
-            z-index: 1000;
-	    font-size: 1.5rem;
-        }
+    #redirect-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      display: none;
+      z-index: 1000;
+      font-size: 1.5rem;
+    }
 
-        #redirect-message a {
-            color: #00ff00;
-            text-decoration: underline;
-        }
+    #redirect-message a {
+      color: #00ff00;
+      text-decoration: underline;
+    }
 
-        #redirect-message .counter {
-            font-size: 2rem;
-            margin-top: 10px;
-        }
-    </style>
-    <script>
-	function copyCouponAndRedirect() {
+    #redirect-message .counter {
+      font-size: 2rem;
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+	  function copyCouponAndRedirect() {
 	    let couponCode = document.querySelector('.parity-banner-inner')?.innerHTML.match(/“([^”]+)”/)?.[1]?.trim();
 	    if (!couponCode) {
-	        couponCode = document.querySelector('.parity-banner-inner')?.innerHTML.match(/"([^"]+)"/)?.[1]?.trim();
+        couponCode = document.querySelector('.parity-banner-inner')?.innerHTML.match(/"([^"]+)"/)?.[1]?.trim();
 	    }
 	    const redirectMessage = document.getElementById('redirect-message');
 	    let countdown = 5;
 	
 	    if (couponCode) {
-	        // Copy the coupon code to the clipboard
-	        navigator.clipboard.writeText(couponCode).then(() => {
-	            // Show the redirect message and countdown
-	            redirectMessage.innerHTML = `
-	                Coupon code <b>${couponCode}</b> was copied to your clipboard!<br>
-	                Redirecting in <span class="counter">${countdown}</span> seconds.<br>
-	                If not redirected, click <a href="https://www.visual-thinking-workshop.com/product-structure">here</a>.
-	            `;
-	            redirectMessage.style.display = 'block';
-	
-	            // Start countdown and redirect
-	            const interval = setInterval(() => {
-	                countdown--;
-	                document.querySelector('.counter').textContent = countdown;
-	                if (countdown === 0) {
-	                    clearInterval(interval);
-	                    window.location.href = 'https://www.visual-thinking-workshop.com/product-structure';
-	                }
-	            }, 1000);
-	        }).catch(err => {
-	            console.error('Failed to copy coupon code: ', err);
-	        });
+        // Copy the coupon code to the clipboard
+        navigator.clipboard.writeText(couponCode).then(() => {
+            // Show the redirect message and countdown
+          redirectMessage.innerHTML = `
+            Coupon code <b>${couponCode}</b> was copied to your clipboard!<br>
+            Redirecting in <span class="counter">${countdown}</span> seconds.<br>
+            If not redirected, click <a href="https://www.visual-thinking-workshop.com/product-structure">here</a>.
+          `;
+          redirectMessage.style.display = 'block';
+
+          // Start countdown and redirect
+          const interval = setInterval(() => {
+            countdown--;
+            document.querySelector('.counter').textContent = countdown;
+            if (countdown === 0) {
+              clearInterval(interval);
+              window.location.href = 'https://www.visual-thinking-workshop.com/product-structure';
+            }
+          }, 1000);
+        }).catch(err => {
+            console.error('Failed to copy coupon code: ', err);
+        });
 	    } else {
-	        // Coupon not found, show an alternative message with countdown
-	        redirectMessage.innerHTML = `
-	            No price parity setup for this location.<br>
-	            Redirecting in <span class="counter">${countdown}</span> seconds.<br>
-	            You can email <a href="mailto:info@visual-thinking-workshop.com">info@visual-thinking-workshop.com</a>
-	            explaining why we should consider price parity for your region.
-	        `;
-	        redirectMessage.style.display = 'block';
-	
-	        // Start countdown and redirect
-	        const interval = setInterval(() => {
-	            countdown--;
-	            document.querySelector('.counter').textContent = countdown;
-	            if (countdown === 0) {
-	                clearInterval(interval);
-	                window.location.href = 'https://www.visual-thinking-workshop.com/product-structure';
-	            }
-	        }, 1000);
+        // Coupon not found, show an alternative message with countdown
+        redirectMessage.innerHTML = `
+          Sorry, price parity isn't available for your region.<br>
+          Redirecting in <span class="counter">${countdown}</span> seconds.<br>
+          To request it, email <a href="mailto:info@visual-thinking-workshop.com">info@visual-thinking-workshop.com</a>.
+        `;
+        redirectMessage.style.display = 'block';
+
+        // Start countdown and redirect
+        const interval = setInterval(() => {
+          countdown--;
+          document.querySelector('.counter').textContent = countdown;
+          if (countdown === 0) {
+            clearInterval(interval);
+            window.location.href = 'https://www.visual-thinking-workshop.com/product-structure';
+          }
+        }, 1000);
 	    }
-	}
+	  }
 	
-	function removeNoParityDiv() {
-	    const noParityDiv = document.querySelector('div.no-parity');
-	    if (noParityDiv) {
-	        noParityDiv.remove();
-	    }
-	}
-	
-	const observer = new MutationObserver((mutations) => {
-	    mutations.forEach(mutation => {
-	        if (mutation.type === 'attributes' && mutation.target.classList.contains('pd-has-parity-banner')) {
-	            removeNoParityDiv();
-	        }
-	    });
-	});
-	
-	const config = { attributes: true, childList: false, subtree: false };
-	
-	window.onload = () => {
-	    const image = document.querySelector('img');
-	    image.addEventListener('click', copyCouponAndRedirect);
-	    if(document.body.classList.contains("pd-has-parity-banner")) {
-	  	removeNoParityDiv();
-	    } else {
-	    	observer.observe(document.body, config);
-	    }
-	};
-    </script>
+    function removeNoParityDiv() {
+      const noParityDiv = document.querySelector('div.no-parity');
+      if (noParityDiv) {
+        noParityDiv.remove();
+      }
+    }
+    
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(mutation => {
+        if (mutation.type === 'attributes' && mutation.target.classList.contains('pd-has-parity-banner')) {
+          removeNoParityDiv();
+        }
+      });
+    });
+    
+    const config = { attributes: true, childList: false, subtree: false };
+    
+    window.onload = () => {
+      const image = document.querySelector('img');
+      image.addEventListener('click', copyCouponAndRedirect);
+      if(document.body.classList.contains("pd-has-parity-banner")) {
+      removeNoParityDiv();
+      } else {
+        observer.observe(document.body, config);
+      }
+    };
+  </script>
 </head>
 <body>
-    <div class="no-parity">
-       Looks like there is no price parity set up at this time and/or for your region. You may email <a style="color: #99DEDE;" href="mailto:info@visual-thinking-workshop.com">info@visual-thinking-workshop.com</a> explaining why I should consider price parity for your region.
-    </div>
-    <img src="images/map.png" alt="Parity Deals Banner" onclick="copyCouponAndRedirect()"/>
-    <div id="redirect-message"></div>
-    <script src="https://cdn.paritydeals.com/banner.js"></script>
+  <div class="no-parity">
+    It seems price parity isn't available for your region at this time. If you'd like to request it, feel free to email <a style="color: #FFF6F0;" href="mailto:info@visual-thinking-workshop.com">info@visual-thinking-workshop.com</a> with your reasons for consideration.
+  </div>
+  <img src="images/map.png" alt="Parity Deals Banner" onclick="copyCouponAndRedirect()"/>
+  <div id="redirect-message"></div>
+  <script src="https://cdn.paritydeals.com/banner.js"></script>
 </body>
 </html>
