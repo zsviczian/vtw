@@ -97,7 +97,7 @@
             document.querySelector('.counter').textContent = countdown;
             if (countdown === 0) {
               clearInterval(interval);
-              window.location.href = 'https://www.visual-thinking-workshop.com/product-structure';
+              window.location.href = 'https://www.visual-thinking-workshop.com/product-structure?coupon=' + couponCode;
             }
           }, 1000);
         }).catch(err => {
